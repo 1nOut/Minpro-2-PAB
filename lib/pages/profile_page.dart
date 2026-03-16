@@ -70,10 +70,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
     setState(() => _loading = true);
     try {
-      // Verifikasi password lama dengan re-login
       await SupabaseService.login(_email, old);
 
-      // Ganti password
       await Supabase.instance.client.auth.updateUser(
         UserAttributes(password: newP),
       );
@@ -113,7 +111,6 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: isDark ? AppTheme.bgDark : AppTheme.bgLight,
       body: CustomScrollView(
         slivers: [
-          // AppBar
           SliverAppBar(
             pinned: true,
             expandedHeight: 160,
@@ -178,7 +175,6 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ── Info Akun ──────────────────────────────
                   _sectionLabel("Informasi Akun", isDark),
                   const SizedBox(height: 12),
                   Container(
@@ -190,7 +186,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     child: Column(
                       children: [
-                        // Avatar
                         Center(
                           child: Container(
                             width: 72,
@@ -211,7 +206,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        // Email
                         _infoTile(
                           isDark,
                           icon: Icons.email_outlined,
@@ -219,7 +213,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           value: _email,
                         ),
                         const Divider(height: 24),
-                        // Bergabung sejak
                         _infoTile(
                           isDark,
                           icon: Icons.calendar_today_outlined,
@@ -232,7 +225,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                   const SizedBox(height: 28),
 
-                  // ── Ganti Password ────────────────────────
                   _sectionLabel("Ganti Password", isDark),
                   const SizedBox(height: 12),
                   Container(

@@ -2,24 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // ── Core Palette ──────────────────────────────────────────
   static const Color primary      = Color(0xFF0D3B24);
   static const Color primaryLight = Color(0xFF1A6B41);
   static const Color accent       = Color(0xFF2ECC71);
   static const Color accentDark   = Color(0xFF27AE60);
   static const Color gold         = Color(0xFFF39C12);
 
-  // Light mode
   static const Color bgLight      = Color(0xFFF0F4F2);
   static const Color surfaceLight = Color(0xFFFFFFFF);
   static const Color cardLight    = Color(0xFFFFFFFF);
 
-  // Dark mode
   static const Color bgDark       = Color(0xFF0A0F0C);
   static const Color surfaceDark  = Color(0xFF111A14);
   static const Color cardDark     = Color(0xFF182219);
 
-  // ── Gradients ─────────────────────────────────────────────
   static const LinearGradient primaryGradient = LinearGradient(
     colors: [Color(0xFF0D3B24), Color(0xFF1A6B41)],
     begin: Alignment.topLeft,
@@ -44,7 +40,6 @@ class AppTheme {
     end: Alignment.bottomRight,
   );
 
-  // ── Shadows ───────────────────────────────────────────────
   static List<BoxShadow> cardShadow = [
     BoxShadow(
       color: const Color(0xFF0D3B24).withOpacity(0.15),
@@ -61,13 +56,11 @@ class AppTheme {
     ),
   ];
 
-  // ── Border Radius ─────────────────────────────────────────
   static final BorderRadius radiusSmall  = BorderRadius.circular(12);
   static final BorderRadius radiusMedium = BorderRadius.circular(18);
   static final BorderRadius radiusLarge  = BorderRadius.circular(24);
   static final BorderRadius radiusXL     = BorderRadius.circular(32);
 
-  // ── Text Styles ───────────────────────────────────────────
   static TextStyle get displayStyle => GoogleFonts.plusJakartaSans(
         fontSize: 28,
         fontWeight: FontWeight.w800,
@@ -96,7 +89,6 @@ class AppTheme {
         letterSpacing: 0.3,
       );
 
-  // ── Themes ────────────────────────────────────────────────
   static ThemeData get lightTheme => ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(

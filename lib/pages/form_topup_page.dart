@@ -37,7 +37,6 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
     return 'assets/image/ml.png';
   }
 
-  // Validasi format email
   bool _isValidEmail(String email) {
     return RegExp(r'^[\w\.-]+@[\w\.-]+\.\w{2,}$').hasMatch(email);
   }
@@ -47,19 +46,16 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
     final jumlahText = jumlahCtrl.text.trim();
     final email = emailCtrl.text.trim();
 
-    // Cek field kosong
     if (id.isEmpty || jumlahText.isEmpty || email.isEmpty) {
       _snack("Semua field wajib diisi!", isError: true);
       return;
     }
 
-    // Cek ID hanya angka
     if (!RegExp(r'^\d+$').hasMatch(id)) {
       _snack("ID Player hanya boleh berisi angka!", isError: true);
       return;
     }
 
-    // Cek format email
     if (!_isValidEmail(email)) {
       _snack("Format email tidak valid!", isError: true);
       return;
@@ -151,7 +147,6 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
                         children: [
                           Row(
                             children: [
-                              // Game logo
                               Container(
                                 width: 54,
                                 height: 54,
@@ -221,7 +216,6 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Info banner
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -287,7 +281,6 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
                     isDark: isDark,
                   ),
                   const SizedBox(height: 32),
-                  // Submit button
                   GestureDetector(
                     onTap: _loading ? null : _submit,
                     child: AnimatedContainer(

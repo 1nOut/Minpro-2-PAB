@@ -83,14 +83,12 @@ class _LoginPageState extends State<LoginPage>
     return Scaffold(
       body: Stack(
         children: [
-          // Background gradient
           Container(
             height: MediaQuery.of(context).size.height * 0.45,
             decoration: const BoxDecoration(
               gradient: AppTheme.primaryGradient,
             ),
           ),
-          // Decorative circles
           Positioned(
             top: -60,
             right: -60,
@@ -118,7 +116,6 @@ class _LoginPageState extends State<LoginPage>
           SafeArea(
             child: Column(
               children: [
-                // Theme toggle
                 Align(
                   alignment: Alignment.topRight,
                   child: Padding(
@@ -134,7 +131,6 @@ class _LoginPageState extends State<LoginPage>
                     ),
                   ),
                 ),
-                // Hero section
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),
                   child: Column(
@@ -164,7 +160,6 @@ class _LoginPageState extends State<LoginPage>
                   ),
                 ),
                 const SizedBox(height: 32),
-                // Card form
                 Expanded(
                   child: FadeTransition(
                     opacity: _fadeAnim,

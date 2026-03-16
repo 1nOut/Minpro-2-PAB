@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
-/// Widget helper untuk menampilkan gambar game
-/// - Jika logo URL (http/https) → Image.network
-/// - Jika logo path asset → Image.asset
 class GameImage extends StatelessWidget {
   final String logo;
   final double size;

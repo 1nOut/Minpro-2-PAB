@@ -29,7 +29,6 @@ class _PendingPageState extends State<PendingPage> {
   }
 
   void _subscribeRealtime() {
-    // Subscribe perubahan transaksi
     _channelTransaksi = Supabase.instance.client
         .channel('pending_transaksi')
         .onPostgresChanges(
@@ -42,7 +41,6 @@ class _PendingPageState extends State<PendingPage> {
         )
         .subscribe();
 
-    // Subscribe perubahan games (untuk info stok terkini)
     _channelGames = Supabase.instance.client
         .channel('pending_games')
         .onPostgresChanges(

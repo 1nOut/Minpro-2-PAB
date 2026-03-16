@@ -4,7 +4,7 @@ class Transaksi {
   String idPlayer;
   int jumlah;
   String email;
-  String status; // 'pending' | 'selesai'
+  String status; 
   DateTime? createdAt;
 
   Transaksi({

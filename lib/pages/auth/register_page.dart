@@ -67,13 +67,10 @@ class _RegisterPageState extends State<RegisterPage>
     try {
       await SupabaseService.register(email, pass);
 
-      // Logout dulu agar tidak langsung masuk ke app
-      // Supabase otomatis buat session saat signUp berhasil
       await SupabaseService.logout();
 
       if (mounted) {
         _snack("Registrasi berhasil! Silakan login.");
-        // Kembali ke halaman login
         Navigator.pop(context);
       }
     } on AuthException catch (e) {
@@ -122,7 +119,6 @@ class _RegisterPageState extends State<RegisterPage>
           SafeArea(
             child: Column(
               children: [
-                // Back + theme row
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 8, vertical: 4),

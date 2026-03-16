@@ -7,7 +7,6 @@ import '../models/transaksi.dart';
 class SupabaseService {
   static final SupabaseClient _client = Supabase.instance.client;
 
-  // ==================== AUTH ====================
 
   static Future<AuthResponse> login(String email, String password) async {
     return await _client.auth.signInWithPassword(
@@ -29,7 +28,6 @@ class SupabaseService {
 
   static User? get currentUser => _client.auth.currentUser;
 
-  // ==================== IMAGE UPLOAD ====================
 
   static Future<String> uploadGameImage(File imageFile) async {
     final fileExt = imageFile.path.split('.').last.toLowerCase();
@@ -68,7 +66,6 @@ class SupabaseService {
     return _client.storage.from('game-logos').getPublicUrl(filePath);
   }
 
-  // ==================== GAMES ====================
 
   static Future<List<Game>> fetchGames() async {
     final data = await _client
@@ -90,9 +87,6 @@ class SupabaseService {
     await _client.from('games').delete().eq('id', id);
   }
 
-  // ==================== TRANSAKSI ====================
-  // Semua transaksi dibaca tanpa filter user_id
-  // agar semua akun (admin) bisa melihat data yang sama
 
   static Future<List<Transaksi>> fetchPending() async {
     final data = await _client
@@ -112,10 +106,7 @@ class SupabaseService {
     return (data as List).map((e) => Transaksi.fromMap(e)).toList();
   }
 
-  /// Fetch transaksi selesai beserta email pembuat
-  /// Mengambil email dari view 'profiles' secara terpisah per transaksi
   static Future<List<Map<String, dynamic>>> fetchSelesaiWithCreator() async {
-    // Ambil semua transaksi selesai
     final transaksiData = await _client
         .from('transaksi')
         .select()
@@ -127,7 +118,6 @@ class SupabaseService {
     for (final t in transaksiData as List) {
       final map = Map<String, dynamic>.from(t);
 
-      // Ambil email pembuat dari view profiles
       try {
         final userId = t['user_id'];
         if (userId != null) {

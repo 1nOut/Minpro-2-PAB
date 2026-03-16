@@ -100,7 +100,6 @@ class _MainPageState extends State<MainPage> {
                     Icons.pending_actions_outlined, "Pending"),
                 _navItem(3, Icons.history_rounded,
                     Icons.history_outlined, "Riwayat"),
-                // Settings
                 Expanded(
                   child: GestureDetector(
                     onTap: () => _showMenu(context),

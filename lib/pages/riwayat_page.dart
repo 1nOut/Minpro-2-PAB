@@ -172,7 +172,6 @@ class _RiwayatPageState extends State<RiwayatPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Header
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
