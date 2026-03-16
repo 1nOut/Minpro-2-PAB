@@ -1,0 +1,30 @@
+name: topup_game
+description: Aplikasi Top Up Game dengan Supabase
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^2.3.4
+  flutter_dotenv: ^5.1.0
+  intl: ^0.19.0
+  google_fonts: ^6.1.0
+  image_picker: ^1.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
+    - assets/image/ml.png
+    - assets/image/ff.png
+    - assets/image/pubgm.png
