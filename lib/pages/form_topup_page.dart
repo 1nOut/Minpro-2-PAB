@@ -5,6 +5,7 @@ import '../models/game.dart';
 import '../models/transaksi.dart';
 import '../services/supabase_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/game_image.dart';
 
 class FormTopUpPage extends StatefulWidget {
   final Game game;
@@ -29,14 +30,6 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
     super.dispose();
   }
 
-  String _logoPath(String logo) {
-    if (logo.startsWith('assets/')) return logo;
-    if (logo.contains('ml')) return 'assets/image/ml.png';
-    if (logo.contains('ff')) return 'assets/image/ff.png';
-    if (logo.contains('pubg')) return 'assets/image/pubgm.png';
-    return 'assets/image/ml.png';
-  }
-
   bool _isValidEmail(String email) {
     return RegExp(r'^[\w\.-]+@[\w\.-]+\.\w{2,}$').hasMatch(email);
   }
@@ -50,12 +43,10 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
       _snack("Semua field wajib diisi!", isError: true);
       return;
     }
-
     if (!RegExp(r'^\d+$').hasMatch(id)) {
       _snack("ID Player hanya boleh berisi angka!", isError: true);
       return;
     }
-
     if (!_isValidEmail(email)) {
       _snack("Format email tidak valid!", isError: true);
       return;
@@ -67,7 +58,8 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
       return;
     }
     if (jumlah > widget.game.stok) {
-      _snack("Stok tidak cukup! Tersedia: ${widget.game.stok}", isError: true);
+      _snack("Stok tidak cukup! Tersedia: ${widget.game.stok}",
+          isError: true);
       return;
     }
 
@@ -110,20 +102,18 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor:
-          isDark ? AppTheme.bgDark : AppTheme.bgLight,
+      backgroundColor: isDark ? AppTheme.bgDark : AppTheme.bgLight,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 200,
             backgroundColor: AppTheme.primary,
-            iconTheme:
-                const IconThemeData(color: Colors.white),
+            iconTheme: const IconThemeData(color: Colors.white),
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                decoration:
-                    const BoxDecoration(gradient: AppTheme.primaryGradient),
+                decoration: const BoxDecoration(
+                    gradient: AppTheme.primaryGradient),
                 child: Stack(
                   children: [
                     Positioned(
@@ -147,28 +137,23 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
                         children: [
                           Row(
                             children: [
+                              // Game logo — pakai GameImage agar support URL & asset
                               Container(
                                 width: 54,
                                 height: 54,
                                 decoration: BoxDecoration(
-                                  color:
-                                      Colors.white.withOpacity(0.15),
+                                  color: Colors.white.withOpacity(0.15),
                                   borderRadius: AppTheme.radiusMedium,
                                   border: Border.all(
                                       color:
                                           Colors.white.withOpacity(0.3),
                                       width: 1.5),
                                 ),
-                                child: ClipRRect(
+                                child: GameImage(
+                                  logo: widget.game.logo,
+                                  size: 54,
+                                  fit: BoxFit.cover,
                                   borderRadius: AppTheme.radiusMedium,
-                                  child: Image.asset(
-                                    _logoPath(widget.game.logo),
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (_, __, ___) =>
-                                        const Icon(Icons.games_rounded,
-                                            color: Colors.white70,
-                                            size: 28),
-                                  ),
                                 ),
                               ),
                               const SizedBox(width: 14),
@@ -216,6 +201,7 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Info banner
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
@@ -288,12 +274,9 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
                       width: double.infinity,
                       height: 58,
                       decoration: BoxDecoration(
-                        gradient: _loading
-                            ? null
-                            : AppTheme.primaryGradient,
-                        color: _loading
-                            ? Colors.grey.shade300
-                            : null,
+                        gradient:
+                            _loading ? null : AppTheme.primaryGradient,
+                        color: _loading ? Colors.grey.shade300 : null,
                         borderRadius: AppTheme.radiusLarge,
                         boxShadow: _loading
                             ? []
@@ -312,8 +295,7 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
                                 width: 22,
                                 height: 22,
                                 child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2.5),
+                                    color: Colors.white, strokeWidth: 2.5),
                               )
                             : Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -364,8 +346,7 @@ class _FormTopUpPageState extends State<FormTopUpPage> {
         labelStyle: AppTheme.bodyStyle.copyWith(color: Colors.grey),
         hintStyle: AppTheme.bodyStyle
             .copyWith(color: Colors.grey.shade400, fontSize: 13),
-        prefixIcon:
-            Icon(icon, color: AppTheme.primaryLight, size: 20),
+        prefixIcon: Icon(icon, color: AppTheme.primaryLight, size: 20),
         filled: true,
         fillColor: isDark ? AppTheme.cardDark : Colors.white,
         border: OutlineInputBorder(
